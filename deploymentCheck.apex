@@ -9,6 +9,9 @@ cpqDeployableObjects.remove('SBQQ__QuoteLine__c');
 cpqDeployableObjects.remove('SBQQ__Quote__c');
 cpqDeployableObjects.remove('SBQQ__RecordJob__c');
 
+cpqDeployableObjects.add('Product2');
+cpqDeployableObjects.add('PricebookEntry');
+
 for(String cpqObject : cpqDeployableObjects){
     
     String query = 'SELECT Id, Name, CreatedDate FROM ' + cpqObject + ' WHERE CreatedDate >= LAST_N_DAYS:' + 15;
@@ -19,4 +22,3 @@ for(String cpqObject : cpqDeployableObjects){
     }
   
 }
-
