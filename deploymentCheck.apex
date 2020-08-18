@@ -19,6 +19,7 @@ cpqDeployableObjects.add('Product2');
 cpqDeployableObjects.add('PricebookEntry');
 
 String debugString = '';
+Integer i = 0;
 
 for(String cpqObject : cpqDeployableObjects){
     
@@ -32,16 +33,22 @@ for(String cpqObject : cpqDeployableObjects){
     List<SObject> tmpList = Database.query(query);
         
     if(tmpList.size() > 0){
-        System.debug('Current object: ' + cpqObject +', listSize: ' + tmpList.size());
-     
+        System.debug(cpqObject +', listSize: ' + tmpList.size());
+			
+        i = 1;
         for(SObject record : tmpList){
             debugString = '----> ';
             debugString += ('Name: ' + record.get('Name'));
             debugString += (', Id: ' + record.get('Id'));
             debugString += (', LastModifiedDate: ' + record.get('LastModifiedDate'));
             debugString += (', LastModifiedBy: ' + userNamesByIds.get((Id)record.get('LastModifiedById')));
-            System.debug(debugString);         
+            if(i == tmpList.size())  {
+                debugString += '\n';
+            }
+            i++;
+            System.debug(debugString);
         }
+
     }
     
 }
