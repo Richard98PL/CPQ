@@ -1,0 +1,19 @@
+List<SBQQ__TemplateContent__c> actions = [SELECT ID,Name,SBQQ__RawMarkup__c FROM SBQQ__TemplateContent__c ];
+String x = '{!';
+Pattern p = Pattern.compile('\\{!.+?\\}');
+
+
+for(SBQQ__TemplateContent__c action : actions){
+    if(action.SBQQ__RawMarkup__c != null && action.SBQQ__RawMarkup__c.contains(x)){
+        System.debug('------------------------');
+       // System.debug(action.SBQQ__RawMarkup__c.susbstring(action.SBQQ__RawMarkup__c.indexOf('{!'),action.SBQQ__RawMarkup__c.indexOf('{!')+20));
+        //System.debug(action.SBQQ__RawMarkup__c);
+        System.debug('------------------------');
+        
+        Matcher m = p.matcher(action.SBQQ__RawMarkup__c);
+        while(m.find()) {
+            System.debug(m.group(0));
+        }
+    }
+   
+}
